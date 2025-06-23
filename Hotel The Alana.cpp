@@ -205,41 +205,66 @@ public:
         
         system("pause");
     }
-    
-    void cariPengunjung() {
+ 
+	 void sortByKTP() {
+	    // Bubble sort untuk mengurutkan berdasarkan nomor KTP
+	    for (int i = 0; i < daftarTamu.size() - 1; ++i) {
+	        for (int j = 0; j < daftarTamu.size() - i - 1; ++j) {
+	            if (daftarTamu[j].nomorKTP > daftarTamu[j + 1].nomorKTP) {
+	                Tamu temp = daftarTamu[j];
+	                daftarTamu[j] = daftarTamu[j + 1];
+	                daftarTamu[j + 1] = temp;
+	            }
+	        }
+	    }
+	}
+   
+    void binarySearchTamu() {
 	    system("cls");
-	
+	    
 	    if (daftarTamu.empty()) {
 	        cout << "Tidak ada tamu yang terdaftar.\n";
 	        system("pause");
 	        return;
 	    }
 	
+	    // Urutkan data terlebih dahulu
+	    sortByKTP();
+	
 	    string nomorKTP;
-	    cout << "Masukkan nomor KTP tamu: ";
+	    cout << "Masukkan nomor KTP tamu yang dicari: ";
 	    cin.ignore();
 	    getline(cin, nomorKTP);
 	
-	    bool ditemukan = false;
-	    for (size_t i = 0; i < daftarTamu.size(); ++i) {
-	        Tamu tamu = daftarTamu[i]; 
+	    int left = 0;
+	    int right = daftarTamu.size() - 1;
+	    int foundIndex = -1;
 	
-	        if (tamu.nomorKTP == nomorKTP) {
-	            cout << "\n------------------------------------------\n";
-	            cout << "              Detail Tamu                \n";
-	            cout << "------------------------------------------\n";
-	            cout << "Nama        : " << tamu.nama << endl;
-	            cout << "Nomor KTP   : " << tamu.nomorKTP << endl;
-	            cout << "Nomor Kamar : " << tamu.noKamar << endl;
-	            cout << "Tipe Kamar  : " << tamu.tipeKamar << endl;
-	            cout << "Durasi Inap : " << tamu.durasiInap << " malam\n";
-	            cout << "------------------------------------------\n";
-	            ditemukan = true;
+	    while (left <= right) {
+	        int mid = left + (right - left) / 2;
+	
+	        if (daftarTamu[mid].nomorKTP == nomorKTP) {
+	            foundIndex = mid;
 	            break;
+	        } else if (daftarTamu[mid].nomorKTP < nomorKTP) {
+	            left = mid + 1;
+	        } else {
+	            right = mid - 1;
 	        }
 	    }
 	
-	    if (!ditemukan) {
+	    if (foundIndex != -1) {
+	        Tamu tamu = daftarTamu[foundIndex];
+	        cout << "\n------------------------------------------\n";
+	        cout << "              Detail Tamu                \n";
+	        cout << "------------------------------------------\n";
+	        cout << "Nama        : " << tamu.nama << endl;
+	        cout << "Nomor KTP   : " << tamu.nomorKTP << endl;
+	        cout << "Nomor Kamar : " << tamu.noKamar << endl;
+	        cout << "Tipe Kamar  : " << tamu.tipeKamar << endl;
+	        cout << "Durasi Inap : " << tamu.durasiInap << " malam\n";
+	        cout << "------------------------------------------\n";
+	    } else {
 	        cout << "Tamu dengan nomor KTP " << nomorKTP << " tidak ditemukan.\n";
 	    }
 	
@@ -654,7 +679,7 @@ public:
 	                break;
 	            }
 	            
-	            cout << "\nMasukkan nomor KTP untuk menghapus transaksi: ";
+	            cout << "\nMasukkan nomor KTP untuk menghapus transaksi : ";
 	            string nomorKTP;
 	            cin.ignore();
 	            getline(cin, nomorKTP);
@@ -724,7 +749,7 @@ public:
             switch (pil)
             {
                 case 1:
-                    cariPengunjung();
+                    binarySearchTamu();
                     break;
                 case 2:
                     cariKamar();
