@@ -391,6 +391,95 @@ public:
         system("pause");
     }
     
+    void cariSpecial() {
+	    system("cls");
+	    string noSpecial;
+	    cout << "Masukkan nomor Special Package (contoh: A001, G002): ";
+	    cin >> noSpecial;
+	
+	    for (size_t i = 0; i < noSpecial.length(); ++i) {
+	        noSpecial[i] = toupper(noSpecial[i]);
+	    }
+	
+	    bool ditemukan = false;
+	    bool statusSpecial = false;
+	
+	    if (noSpecial == "A001") { 
+	        statusSpecial = a001; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "A002") { 
+	        statusSpecial = a002; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "A003") { 
+	        statusSpecial = a003; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "G001") { 
+	        statusSpecial = g001; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "G002") { 
+	        statusSpecial = g002; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "G003") { 
+	        statusSpecial = g003; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "AB001") { 
+	        statusSpecial = ab001; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "AB002") { 
+	        statusSpecial = ab002; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "AB003") { 
+	        statusSpecial = ab003; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "PK001") { 
+	        statusSpecial = pk001; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "PK002") { 
+	        statusSpecial = pk002; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "PK003") { 
+	        statusSpecial = pk003; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "U001") { 
+	        statusSpecial = u001; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "U002") { 
+	        statusSpecial = u002; 
+	        ditemukan = true; 
+	    } else if (noSpecial == "U003") { 
+	        statusSpecial = u003; 
+	        ditemukan = true; 
+	    }
+	
+	    if (ditemukan) {
+	        cout << "\nStatus Special Package " << noSpecial << " : ";
+	        cout << (statusSpecial ? "Tersedia" : "Tidak Tersedia") << endl;
+	
+	        if (!statusSpecial) {
+	            bool tamuDitemukan = false;
+	            for (size_t i = 0; i < daftarSpecial.size(); ++i) {
+	                if (daftarSpecial[i].package.find(noSpecial.substr(0, 1))) {
+	                    cout << "\n------------------------------------------\n";
+	                    cout << "      Detail Tamu        \n";
+	                    cout << "------------------------------------------\n";
+	                    cout << "Nama        : " << daftarSpecial[i].nama << endl;
+	                    cout << "Nomor KTP   : " << daftarSpecial[i].nomorKTP << endl;
+	                    cout << "Package     : " << daftarSpecial[i].package << endl;
+	                    cout << "------------------------------------------\n";
+	                    tamuDitemukan = true;
+	                    break;
+	                }
+	            }
+	            if (!tamuDitemukan) {
+	                cout << "Ruangan dipesan tetapi data tamu tidak ditemukan.\n";
+	            }
+	        }
+	    } else {
+	        cout << "Nomor Special Package tidak valid.\n";
+	    }
+	    system("pause");
+	}
+    
     void SortbyName() {
     system("cls");
     
@@ -459,7 +548,7 @@ public:
     }
     cout << "------------------------------------------\n";
     system("pause");
-    
+
 }
 
     void laporan() {
@@ -735,12 +824,13 @@ public:
             cout << "------------------------------------------------\n";
             cout << "1. Cari Pengunjung\n";
             cout << "2. Cari Kamar\n";
-            cout << "3. Sort by Nama Pengunjung\n";
-            cout << "4. Sort by No.Kamar\n";
-            cout << "5. Lihat Laporan\n";
-            cout << "6. Lihat Laporan Transaksi Selesai\n";
-            cout << "7. Hapus Laporan Transaksi\n";
-            cout << "8. Lihat Rating Kamar\n";
+            cout << "3. Cari Special Package\n";
+            cout << "4. Sort by Nama Pengunjung\n";
+            cout << "5. Sort by No.Kamar\n";
+            cout << "6. Lihat Laporan\n";
+            cout << "7. Lihat Laporan Transaksi Selesai\n";
+            cout << "8. Hapus Laporan Transaksi\n";
+            cout << "9. Lihat Rating Kamar\n";
             cout << "0. Keluar\n";
             cout << "------------------------------------------------\n";
             cout << "Silahkan pilih (1-4): ";
@@ -755,21 +845,24 @@ public:
                     cariKamar();
                     break;
                 case 3:
-                	SortbyName();
+                	cariSpecial();
                 	break;
                 case 4:
-                	SortbyNumber();
+                	SortbyName();
                 	break;
                 case 5:
+                	SortbyNumber();
+                	break;
+                case 6:
                     laporan();
                     break;
-                case 6:
+                case 7:
                 	laporanTransaksiSelesai();
                 break;
-                case 7:
+                case 8:
                 	HapusLaporanT();
                 	break;
-                case 8:
+                case 9:
                 	tampilkanRating();
                 	break;
                 default:
