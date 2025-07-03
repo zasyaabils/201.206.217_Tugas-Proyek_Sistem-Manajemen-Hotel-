@@ -833,7 +833,7 @@ public:
             cout << "9. Lihat Rating Kamar\n";
             cout << "0. Keluar\n";
             cout << "------------------------------------------------\n";
-            cout << "Silahkan pilih (1-4): ";
+            cout << "Silahkan pilih (1-9): ";
             cin >> pil;
 
             switch (pil)
@@ -898,32 +898,16 @@ public:
             cout << "\n------------------------------------------------\n";
             cout << "      Selamat Datang di Hotel The Alana         \n";
             cout << "------------------------------------------------\n";
-            cout << "1. Admin\n";
-            cout << "2. Pengunjung\n";
+            cout << "1. Pengunjung\n";
+            cout << "2. Admin\n";
             cout << "0. Keluar\n";
             cout << "------------------------------------------------\n";
             cout << "Silahkan pilih (1-2): ";
             cin >> login;
 
             switch (login) {
-            case 1:
-            	cout << "\n------------------------------------------------";
-            	cout << "\n**Username dan Password Tidak Boleh Ada Spasi";
-            	cout << "\n------------------------------------------------\n";
-                cout << "Masukkan Username : ";
-                cin >> username;
-                cout << "Masukkan Password : ";
-                cin >> password;
-                if (username == admin && password == passAdmin) {
-                    system("cls");
-                    menuAdmin();
-                    system("pause");
-                } else {
-                    cout << "Username dan Password tidak sesuai.\n";
-                }
-                break;
                 
-            case 2:
+            case 1:
             	cout << "\n------------------------------------------------";
             	cout << "\n**Username dan Password Tidak Boleh Ada Spasi";
             	cout << "\n------------------------------------------------\n";
@@ -934,6 +918,23 @@ public:
                 if (username == pengunjung && password == passPengunjung) {
                     system("cls");
                     menu();
+                    system("pause");
+                } else {
+                    cout << "Username dan Password tidak sesuai.\n";
+                }
+                break;
+                
+                case 2:
+            	cout << "\n------------------------------------------------";
+            	cout << "\n**Username dan Password Tidak Boleh Ada Spasi";
+            	cout << "\n------------------------------------------------\n";
+                cout << "Masukkan Username : ";
+                cin >> username;
+                cout << "Masukkan Password : ";
+                cin >> password;
+                if (username == admin && password == passAdmin) {
+                    system("cls");
+                    menuAdmin();
                     system("pause");
                 } else {
                     cout << "Username dan Password tidak sesuai.\n";
